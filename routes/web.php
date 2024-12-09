@@ -20,7 +20,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/activate', [ActivateController::class, 'index'])->middleware(['auth', 'verified'])->name('activate');
+Route::get('/Activacion/{activate}', [ActivateController::class, 'index'])->middleware(['auth', 'verified'])->name('Activacion');
+Route::get('/Desactivar/{deactivate}', [ActivateController::class, 'index'])->middleware(['auth', 'verified'])->name('Desactivar');
 
 
 
@@ -28,14 +29,12 @@ Route::get('/activate', [ActivateController::class, 'index'])->middleware(['auth
 
 
 Route::get('relaciones/uno_muchos', function(){
-    $post = Role::find(1);
- 
+    $rol = Role::find(1);
+    $activeUsers = $rol->users()
+        ->where('is_active', 2)
+        ->get(['role_id', 'name']);
 
-
-    $comment = User::find(1);
-    $a = [$post->users,$comment->role];
-
-   return $a;
+    return $activeUsers;
  });
 
 require __DIR__.'/auth.php';
