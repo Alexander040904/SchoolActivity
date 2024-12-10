@@ -20,21 +20,24 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/Activacion/{activate}', [ActivateController::class, 'index'])->middleware(['auth', 'verified'])->name('Activacion');
-Route::get('/Desactivar/{deactivate}', [ActivateController::class, 'index'])->middleware(['auth', 'verified'])->name('Desactivar');
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/activation/{activation}', [ActivateController::class, 'index'])->name('activation');
+    Route::put('active/{id}', [ActivateController::class, 'activate'])->name('activate');
+    Route::put('deactivate/{id}', [ActivateController::class, 'deactivate'])->name('deactivate');
+});
 
 
 
 
-
-
-Route::get('relaciones/uno_muchos', function(){
+Route::get('relaciones/uno_muchos', function () {
     $rol = Role::find(1);
     $activeUsers = $rol->users()
         ->where('is_active', 2)
         ->get(['role_id', 'name']);
 
     return $activeUsers;
- });
+});
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

@@ -15,12 +15,12 @@
 
 
                     @if (Auth::user()->role_id == 1)
-                        <x-nav-link :href="route('Activacion', 1)" :active="request()->routeIs('Activacion')">
+                        <x-nav-link :href="route('activation', 1)"  :active="request()->query('source') === '1'">
                             {{ __('Activos') }}
                         </x-nav-link>
 
 
-                        <x-nav-link :href="route('Desactivar', 2)" :active="request()->routeIs('Desactivar')">
+                        <x-nav-link :href="route('activation', 2)"  :active="request()->query('source') === '2'">
                             {{ __('Inactivos') }}
                         </x-nav-link>
                     @else
