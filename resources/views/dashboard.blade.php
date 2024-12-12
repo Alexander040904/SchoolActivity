@@ -6,7 +6,7 @@
             </h2>
         </x-slot>
 
-        @if (auth()->user()->is_active)
+        @if (auth()->user()->is_active==1)
             <div class="py-12">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
@@ -62,17 +62,20 @@
                                             <form action="{{ route('deactivate', $user->id) }}" method="POST">
                                                 @csrf
                                                 @method('PUT')
-                                                <!-- Esto indica que la solicitud debe ser de tipo PUT -->
-                                                <button class="bg-sky-500 hover:bg-sky-700 px-4 py-2 activateButton"
-                                                    type="submit">Desactivar</button>
+                                                <x-danger-button>
+                                                    Desactivar
+                                                </x-danger-button>
+
+
                                             </form>
                                         @else
                                             <form action="{{ route('activate', $user->id) }}" method="POST">
                                                 @csrf
                                                 @method('PUT')
                                                 <!-- Esto indica que la solicitud debe ser de tipo PUT -->
-                                                <button class="bg-sky-500 hover:bg-sky-700 px-4 py-2 activateButton"
-                                                    type="submit">Activar</button>
+                                                <x-danger-button>
+                                                    Activar
+                                                </x-danger-button>
                                             </form>
                                         @endif
 
@@ -87,9 +90,6 @@
                         </div>
 
                     @endif
-
-
-
 
                 </div>
 
