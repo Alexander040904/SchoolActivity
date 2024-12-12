@@ -13,26 +13,10 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
 
+                    @yield('nav-link')
 
-                    @if (Auth::user()->role_id == 1)
-                        <x-nav-link :href="route('activation', 1)"  :active="request()->query('source') === '1'">
-                            {{ __('Activos') }}
-                        </x-nav-link>
-
-
-                        <x-nav-link :href="route('activation', 2)"  :active="request()->query('source') === '2'">
-                            {{ __('Inactivos') }}
-                        </x-nav-link>
-                    @else
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                            {{ __('Dashboard') }}
-                        </x-nav-link>
-                    @endif
 
                 </div>
-
-
-
 
             </div>
 
